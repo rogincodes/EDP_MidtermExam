@@ -7,6 +7,24 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { GalleryComponent } from './pages/gallery/gallery.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+
+const routes: Routes = [
+  {path: "home", component: HomeComponent,
+    children: [
+      {path: "profile", component: ProfileComponent},
+      {path: "gallery", component: GalleryComponent},
+      {path: "contact", component: ContactComponent},  
+    ]
+  },
+  {path: "**", redirectTo: "home"}
+]
 
 @NgModule({
   declarations: [
@@ -18,7 +36,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot(
+      routes
+    ),
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
